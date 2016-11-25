@@ -19,8 +19,7 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
-import ru.mail.polis.sort.BubbleSort;
-import ru.mail.polis.sort.Helper;
+import ru.mail.polis.sort.*;
 
 /**
  * Created by Nechaev Mikhail
@@ -57,6 +56,36 @@ public class AverageTimeBench {
     @Benchmark
     public void measureBubbleSort() {
         BubbleSort.sort(curr);
+    }
+
+    @Benchmark
+    public void measureInsertionSort() {
+        InsertionSort.sort(curr);
+    }
+
+    @Benchmark
+    public void measureOptimInsertionSort() {
+        OptimInsertionSort.sort(curr);
+    }
+
+    @Benchmark
+    public void measureShellSort() {
+        ShellSort.sort(curr);
+    }
+
+    @Benchmark
+    public void measureMergeSort() {
+        MergeSort.sort(curr);
+    }
+
+    @Benchmark
+    public void measureThreeWayQuickSort() {
+        ThreeWayQuickSort.getSortedArray(curr);
+    }
+
+    @Benchmark
+    public void measureQuickSort() {
+        QuickSort.getSortedArray(curr);
     }
 
     public static void main(String[] args) throws RunnerException {

@@ -13,6 +13,29 @@ public class Helper {
         a[j] = x;
     }
 
+    public static int binSearch(int[] array, int key, int start, int end) {
+        int l = start;
+        int r = end;
+        while (l < r - 1) {
+            int m = (l + r) / 2;
+            if (array[m] < key) {
+                l = m;
+            } else if (array[m] == key) {
+                return m;
+            } else {
+                r = m;
+            }
+        }
+        if (array[l] > key) {
+            return l;
+        }
+        if (array[r] < key){
+            return -1;
+        }
+
+        return r;
+    }
+
     public static int[] gen(int n) {
         int[] a = new int[n];
         for (int i = 0; i < a.length; i++) {

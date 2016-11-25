@@ -15,8 +15,7 @@ import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import ru.mail.polis.sort.BubbleSort;
-import ru.mail.polis.sort.Helper;
+import ru.mail.polis.sort.*;
 
 @RunWith(value = Parameterized.class)
 public class Tester {
@@ -59,6 +58,36 @@ public class Tester {
     @Test
     public void test01_checkBubbleSort() throws IOException {
         Assert.assertTrue(isSorted(BubbleSort.sort(array)));
+    }
+
+    @Test
+    public void test01_checkInsertionSort() throws IOException {
+        Assert.assertTrue(isSorted(InsertionSort.sort(array)));
+    }
+
+    @Test
+    public void test01_checkOptimInsertionSort() throws IOException {
+        Assert.assertTrue(isSorted(OptimInsertionSort.sort(array)));
+    }
+
+    @Test
+    public void test01_checkShellSort() throws IOException {
+        Assert.assertTrue(isSorted(ShellSort.sort(array)));
+    }
+
+    @Test
+    public void test01_checkMergeSort() throws IOException {
+        Assert.assertTrue(isSorted(MergeSort.sort(array)));
+    }
+
+    @Test
+    public void test01_checkThreeWayQuickSort() throws IOException {
+        Assert.assertTrue(isSorted(ThreeWayQuickSort.getSortedArray(array)));
+    }
+
+    @Test
+    public void test01_checkQuickSort() throws IOException {
+        Assert.assertTrue(isSorted(QuickSort.getSortedArray(array)));
     }
 
 }
