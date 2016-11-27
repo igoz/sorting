@@ -55,39 +55,45 @@ public class Tester {
         return isSorted;
     }
 
-    @Test
-    public void test01_checkBubbleSort() throws IOException {
-        Assert.assertTrue(isSorted(BubbleSort.sort(array)));
-    }
+//    @Test
+//    public void test01_checkBubbleSort() throws IOException {
+//        Assert.assertTrue(isSorted(BubbleSort.sort(array)));
+//    }
+//
+//    @Test
+//    public void test01_checkInsertionSort() throws IOException {
+//        Assert.assertTrue(isSorted(InsertionSort.sort(array)));
+//    }
+//
+//    @Test
+//    public void test01_checkOptimInsertionSort() throws IOException {
+//        Assert.assertTrue(isSorted(OptimInsertionSort.sort(array)));
+//    }
+//
+//    @Test
+//    public void test01_checkShellSort() throws IOException {
+//        Assert.assertTrue(isSorted(ShellSort.sort(array)));
+//    }
+//
+//    @Test
+//    public void test01_checkMergeSort() throws IOException {
+//        Assert.assertTrue(isSorted(MergeSort.sort(array)));
+//    }
+//
+//    @Test
+//    public void test01_checkThreeWayQuickSort() throws IOException {
+//        Assert.assertTrue(isSorted(ThreeWayQuickSort.getSortedArray(array)));
+//    }
+//
+//    @Test
+//    public void test01_checkQuickSort() throws IOException {
+//        Assert.assertTrue(isSorted(QuickSort.getSortedArray(array)));
+//    }
 
     @Test
-    public void test01_checkInsertionSort() throws IOException {
-        Assert.assertTrue(isSorted(InsertionSort.sort(array)));
-    }
-
-    @Test
-    public void test01_checkOptimInsertionSort() throws IOException {
-        Assert.assertTrue(isSorted(OptimInsertionSort.sort(array)));
-    }
-
-    @Test
-    public void test01_checkShellSort() throws IOException {
-        Assert.assertTrue(isSorted(ShellSort.sort(array)));
-    }
-
-    @Test
-    public void test01_checkMergeSort() throws IOException {
-        Assert.assertTrue(isSorted(MergeSort.sort(array)));
-    }
-
-    @Test
-    public void test01_checkThreeWayQuickSort() throws IOException {
-        Assert.assertTrue(isSorted(ThreeWayQuickSort.getSortedArray(array)));
-    }
-
-    @Test
-    public void test01_checkQuickSort() throws IOException {
-        Assert.assertTrue(isSorted(QuickSort.getSortedArray(array)));
+    public void test01_checkOrderStatistic() throws IOException {
+        Assert.assertEquals(ShellSort.sort(Arrays.copyOf(array, array.length))[array.length - 1], OrderStatistic.findOrderStatistic(array, array.length - 1));
+        //System.out.println(OrderStatistic.findOrderStatistic(array, array.length - 1));
     }
 
 }
