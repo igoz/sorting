@@ -16,7 +16,7 @@ import java.util.Collection;
 
 
 @RunWith(value = Parameterized.class)
-public class MergeSortInPlaceSort {
+public class MergeSortInPlaceTest {
     @Rule
     public TestRule watcher = new TestWatcher() {
         protected void starting(final Description description) {
@@ -78,6 +78,6 @@ public class MergeSortInPlaceSort {
 
     @Test
     public void test01_checkMergeSortInPlace() throws IOException {
-        //Assert.assertTrue(isSorted(MergeSortInPlace.sort(Arrays.copyOf(array, array.length))));
+        Assert.assertTrue(isSorted(MergeSortInPlace.sort(Arrays.copyOf(array, array.length))));
     }
 }

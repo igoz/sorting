@@ -1,32 +1,44 @@
 package ru.mail.polis.sort;
 
 public class LSDLong {
-    private final static int MAX_BYTE = 8;
-
-    private static int digit(long num, int idxByte) {
-        return (int)(num >> ((MAX_BYTE - idxByte) * 0x8)) & 0xFF;
-    }
-
-    public static void lsdSort(long[] array, long[] res) {
-        final int r = 256;
-        int d = MAX_BYTE + 1;
-        for (int k = 0; k < d; k++) {
-            int[] count = new int[r];
-            for (long x : array) count[digit(x, k)]++;
-            for (int i = 1; i < r; i++) {
-                count[i] += count[i - 1];
-            }
-            for (int i = array.length - 1; i >= 0; i--) {
-                res[--count[digit(array[i], k)]] = array[i];
-            }
-            System.arraycopy(res, 0, array, 0, array.length);
+    public static long[] sort(long[] arr) {
+        if (arr == null) {
+            return new long[]{};
         }
-    }
 
-    public static long[] sort(long[] array) {
-        long[] res = new long[array.length];
-        lsdSort(array, res);
+        final int R = 1 << 8;
+        final int mask = R - 1;
+        final int w = 8;
 
-        return res;
+        long[] tmp = new long[arr.length];
+
+        for (int d = 0; d != w; ++d) {
+            long[] counters = new long[R + 1];
+            for (int i = 0; i != arr.length; ++i) {
+                int c = (int) ((arr[i] >> 8 * d) & mask);
+                counters[(c + 1)]++;
+            }
+
+            for (int r = 0; r < R; r++)
+                counters[r + 1] += counters[r];
+
+            if (d == w - 1) {
+                long shift1 = counters[R] - counters[R / 2];
+                long shift2 = counters[R / 2];
+                for (int r = 0; r != R / 2; ++r)
+                    counters[r] += shift1;
+                for (int r = R / 2; r != R; ++r)
+                    counters[r] -= shift2;
+            }
+
+            for (int i = 0; i != arr.length; ++i) {
+                int c = (int) ((arr[i] >> 8 * d) & mask);
+                tmp[(int) counters[c]++] = arr[i];
+            }
+
+            for (int i = 0; i != arr.length; ++i)
+                arr[i] = tmp[i];
+        }
+        return arr;
     }
 }

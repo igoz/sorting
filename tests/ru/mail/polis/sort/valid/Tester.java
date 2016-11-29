@@ -80,20 +80,20 @@ public class Tester {
 //        Assert.assertTrue(isSorted(MergeSort.sort(array)));
 //    }
 //
-//    @Test
-//    public void test01_checkThreeWayQuickSort() throws IOException {
-//        Assert.assertTrue(isSorted(ThreeWayQuickSort.getSortedArray(array)));
-//    }
+    @Test
+    public void test01_checkThreeWayQuickSort() throws IOException {
+        Assert.assertTrue(isSorted(ThreeWayQuickSort.getSortedArray(array)));
+    }
 //
 //    @Test
 //    public void test01_checkQuickSort() throws IOException {
 //        Assert.assertTrue(isSorted(QuickSort.getSortedArray(array)));
 //    }
 
-    @Test
-    public void test01_checkOrderStatistic() throws IOException {
-        Assert.assertEquals(ShellSort.sort(Arrays.copyOf(array, array.length))[array.length - 1], OrderStatistic.findOrderStatistic(array, array.length - 1));
-        //System.out.println(OrderStatistic.findOrderStatistic(array, array.length - 1));
-    }
+//    @Test
+//    public void test01_checkOrderStatistic() throws IOException {
+//        Assert.assertEquals(ShellSort.sort(Arrays.copyOf(array, array.length))[array.length - 1], OrderStatistic.findOrderStatistic(array, array.length - 1));
+//        //System.out.println(OrderStatistic.findOrderStatistic(array, array.length - 1));
+//    }
 
 }

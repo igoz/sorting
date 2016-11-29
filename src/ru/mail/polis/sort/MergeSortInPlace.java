@@ -33,7 +33,7 @@ public class MergeSortInPlace {
         }
     }
 
-    static int[] sort(int[] array) {
+    public static int[] sort(int[] array) {
         mergeSort(array, 0, array.length - 1);
 
         return array;
