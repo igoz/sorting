@@ -23,7 +23,7 @@ import ru.mail.polis.sort.*;
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-public class QuickSortBench {
+public class QuickSortBinaryBench {
     private int[] curr;
 
     @Setup(value = Level.Invocation)
@@ -33,12 +33,12 @@ public class QuickSortBench {
 
     @Benchmark
     public void measureQuickSort(Blackhole bh) {
-        bh.consume(QuickSort.getSortedArray(curr));
+        bh.consume(QuickSortBinary.sort(curr));
     }
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
-                .include(QuickSortBench.class.getSimpleName())
+                .include(QuickSortBinaryBench.class.getSimpleName())
                 .warmupIterations(5)
                 .measurementIterations(5)
                 .forks(1)

@@ -1,9 +1,7 @@
 package ru.mail.polis.bench;
 
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-import jdk.nashorn.tools.Shell;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
@@ -24,33 +22,12 @@ import ru.mail.polis.sort.*;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class InsertionSortBench {
-    int[][] data;
-    int[] curr;
-    int index;
-
-    @Setup(value = Level.Trial)
-    public void setUpTrial() {
-        data = new int[10][100];
-        for (int i = 0; i < 10; i++) {
-//            data[i] = Helper.gen(1000);
-//            data[i] = Helper.gen(5000);
-//            data[i] = Helper.gen(10000);
-//
-            data[i] = Helper.genSorted(1000);
-//            data[i] = Helper.genSorted(5000);
-//            data[i] = Helper.genSorted(10000);
-//
-//            data[i] = Helper.genReverse(1000);
-//            data[i] = Helper.genReverse(5000);
-//            data[i] = Helper.genReverse(10000);
-        }
-    }
+    private int[] curr;
 
     @Setup(value = Level.Invocation)
     public void setUpInvocation() {
-        curr = Arrays.copyOf(data[index], data[index].length);
-        index = (index + 1) % 10;
-    }
+        curr = Helper.genReverse(100000);
+    } //genSorted, gen, genReverse
 
     @Benchmark
     public void measureInsertionSort(Blackhole bh) {

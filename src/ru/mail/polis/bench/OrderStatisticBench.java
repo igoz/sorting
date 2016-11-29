@@ -24,37 +24,16 @@ import ru.mail.polis.sort.*;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class OrderStatisticBench {
-    int[][] data;
-    int[] curr;
-    int index;
-
-    @Setup(value = Level.Trial)
-    public void setUpTrial() {
-        data = new int[10][100];
-        for (int i = 0; i < 10; i++) {
-            data[i] = Helper.gen(1000);
-//            data[i] = Helper.gen(5000);
-//            data[i] = Helper.gen(10000);
-//
-//            data[i] = Helper.genSorted(1000);
-//            data[i] = Helper.genSorted(5000);
-//            data[i] = Helper.genSorted(10000);
-//
-//            data[i] = Helper.genReverse(1000);
-//            data[i] = Helper.genReverse(5000);
-//            data[i] = Helper.genReverse(10000);
-        }
-    }
+    private int[] curr;
 
     @Setup(value = Level.Invocation)
     public void setUpInvocation() {
-        curr = Arrays.copyOf(data[index], data[index].length);
-        index = (index + 1) % 10;
-    }
+        curr = Helper.gen(100000);
+    } //genSorted, gen
 
     @Benchmark
     public void measureOrderStatistic(Blackhole bh) {
-        bh.consume(OrderStatistic.findOrderStatistic(curr, 0));
+        bh.consume(OrderStatistic.findOrderStatistic(curr, curr.length - 1));
     }
 
     public static void main(String[] args) throws RunnerException {

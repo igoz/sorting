@@ -23,43 +23,22 @@ import ru.mail.polis.sort.*;
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-public class MSDBench {
-    int[][] data;
-    int[] curr;
-    int index;
-
-    @Setup(value = Level.Trial)
-    public void setUpTrial() {
-        data = new int[10][100];
-        for (int i = 0; i < 10; i++) {
-//            data[i] = Helper.gen(1000);
-//            data[i] = Helper.gen(5000);
-//            data[i] = Helper.gen(10000);
-//
-//            data[i] = Helper.genSorted(1000);
-//            data[i] = Helper.genSorted(5000);
-//            data[i] = Helper.genSorted(10000);
-//
-            data[i] = Helper.genReverse(1000);
-//            data[i] = Helper.genReverse(5000);
-//            data[i] = Helper.genReverse(10000);
-        }
-    }
+public class QuickSortOptimBench {
+    private int[] curr;
 
     @Setup(value = Level.Invocation)
     public void setUpInvocation() {
-        curr = Arrays.copyOf(data[index], data[index].length);
-        index = (index + 1) % 10;
-    }
+        curr = Helper.gen(100000);
+    } //gen, genBadForQuickSort
 
     @Benchmark
-    public void measureInsertionSort(Blackhole bh) {
-        bh.consume(MSDBinary.sort(curr));
+    public void measureQuickSortOptim(Blackhole bh) {
+        bh.consume(ThreeWayQuickSort.getSortedArray(curr));
     }
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
-                .include(MSDBench.class.getSimpleName())
+                .include(QuickSortOptimBench.class.getSimpleName())
                 .warmupIterations(5)
                 .measurementIterations(5)
                 .forks(1)

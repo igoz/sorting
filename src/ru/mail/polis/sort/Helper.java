@@ -171,4 +171,21 @@ public class Helper {
 
         return  result;
     }
+
+    public static String[] genStrings(int count, int n) {
+        String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Random rand = new Random();
+        String[] result = new String[count];
+
+        for (int i = 0; i != count; ++i) {
+            StringBuilder str = new StringBuilder();
+            int size = rand.nextInt(n) + 1;
+            for (int j = 0; j != size; ++j) {
+                int pos = rand.nextInt(alphabet.length());
+                str.append(alphabet.charAt(pos));
+            }
+            result[i] = str.toString();
+        }
+        return result;
+    }
 }

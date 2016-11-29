@@ -23,22 +23,22 @@ import ru.mail.polis.sort.*;
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-public class QuickSortBench {
+public class OrderStatisticLinearBench {
     private int[] curr;
 
     @Setup(value = Level.Invocation)
     public void setUpInvocation() {
-        curr = Helper.gen(100000);
-    } //gen, genBadForQuickSort
+        curr = Helper.genSorted(100000);
+    } //genSorted, gen
 
     @Benchmark
-    public void measureQuickSort(Blackhole bh) {
-        bh.consume(QuickSort.getSortedArray(curr));
+    public void measureOrderStatisticLinear(Blackhole bh) {
+        bh.consume(OrderStatisticLinear.findOrderStatisticLinear(curr, 0, curr.length - 1, curr.length));
     }
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
-                .include(QuickSortBench.class.getSimpleName())
+                .include(OrderStatisticLinearBench.class.getSimpleName())
                 .warmupIterations(5)
                 .measurementIterations(5)
                 .forks(1)

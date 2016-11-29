@@ -1,9 +1,7 @@
 package ru.mail.polis.bench;
 
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-import jdk.nashorn.tools.Shell;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Level;
@@ -23,22 +21,22 @@ import ru.mail.polis.sort.*;
 @State(Scope.Thread)
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
-public class QuickSortBench {
-    private int[] curr;
+public class MSDStringBench {
+    private String[] curr;
 
     @Setup(value = Level.Invocation)
     public void setUpInvocation() {
-        curr = Helper.gen(100000);
-    } //gen, genBadForQuickSort
+        curr = Helper.genStrings(100000, 200);
+    }
 
     @Benchmark
-    public void measureQuickSort(Blackhole bh) {
-        bh.consume(QuickSort.getSortedArray(curr));
+    public void measureInsertionSort(Blackhole bh) {
+        bh.consume(MSDString.sort(curr));
     }
 
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
-                .include(QuickSortBench.class.getSimpleName())
+                .include(MSDStringBench.class.getSimpleName())
                 .warmupIterations(5)
                 .measurementIterations(5)
                 .forks(1)
